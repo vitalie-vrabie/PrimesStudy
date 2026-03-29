@@ -21,7 +21,13 @@ if (primes.Count == 0)
     File.WriteAllText(outputPath, "2" + Environment.NewLine);
 }
 
-using var writer = new StreamWriter(outputPath, append: true);
+using var writer = new StreamWriter(outputPath, append: true) { AutoFlush = true };
+var stopRequested = false;
+Console.CancelKeyPress += (_, e) =>
+{
+    e.Cancel = true;
+    stopRequested = true;
+};
 
 var lastPrime = primes[^1];
 var candidate = lastPrime <= 2 ? 3 : lastPrime + 2;
@@ -32,6 +38,11 @@ if (candidate % 2 == 0)
 
 for (; ; candidate += 2)
 {
+    if (stopRequested)
+    {
+        break;
+    }
+
     var isPrime = true;
 
     foreach (var prime in primes)
