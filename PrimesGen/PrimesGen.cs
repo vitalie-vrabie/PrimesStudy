@@ -2,6 +2,18 @@
 
 var primes = new List<BigInteger>();
 var outputPath = "primes.txt";
+BigInteger? maxValue = null;
+
+if (args.Length > 0)
+{
+    if (!BigInteger.TryParse(args[0], out var parsedMax) || parsedMax < 2)
+    {
+        Console.Error.WriteLine($"Invalid maximum value: {args[0]}");
+        Environment.Exit(1);
+    }
+
+    maxValue = parsedMax;
+}
 
 if (File.Exists(outputPath))
 {
@@ -39,6 +51,11 @@ if (candidate % 2 == 0)
 for (; ; candidate += 2)
 {
     if (stopRequested)
+    {
+        break;
+    }
+
+    if (maxValue.HasValue && candidate > maxValue.Value)
     {
         break;
     }

@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Linq;
 
 var inputPath = args.Length > 0 ? args[0] : "primes.txt";
 if (!File.Exists(inputPath))
@@ -7,12 +8,23 @@ if (!File.Exists(inputPath))
     Environment.Exit(1);
 }
 
+var totalLines = File.ReadLines(inputPath).LongCount();
 BigInteger? previous = null;
 var lineNumber = 0;
+var lastPercent = -1;
 
 foreach (var line in File.ReadLines(inputPath))
 {
     lineNumber++;
+    if (totalLines > 0)
+    {
+        var percent = (int)(lineNumber * 100L / totalLines);
+        if (percent != lastPercent)
+        {
+            Console.WriteLine($"Progress: {percent}%");
+            lastPercent = percent;
+        }
+    }
     if (!BigInteger.TryParse(line, out var value))
     {
         Console.Error.WriteLine($"Invalid number at line {lineNumber}: {line}");
