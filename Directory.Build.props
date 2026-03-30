@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+    <Configuration>Release</Configuration>
     <BaseOutputPath>$(MSBuildThisFileDirectory)bin\</BaseOutputPath>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)obj\</BaseIntermediateOutputPath>
   </PropertyGroup>

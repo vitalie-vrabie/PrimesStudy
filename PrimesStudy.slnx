@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="PrimesGen.csproj" />
+  <Project Path="PrimesGen/PrimesGen.csproj" />
   <Project Path="PrimesValidate/PrimesValidate.csproj" />
 </Solution>
